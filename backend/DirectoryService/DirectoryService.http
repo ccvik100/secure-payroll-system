@@ -1,0 +1,48 @@
+@HostAddress = http://localhost:5001
+
+### 1. Összes dolgozó lekérdezése (READ ALL)
+GET {{HostAddress}}/api/employee
+Accept: application/json
+
+###
+
+### 2. Új dolgozó létrehozása (CREATE)
+# Ha ezt lefuttatod, a válaszban kapsz egy "id"-t. Azt másold ki a következő tesztekhez!
+POST {{HostAddress}}/api/employee
+Content-Type: application/json
+
+{
+  "firstName": "Gipsz",
+  "lastName": "Jakab",
+  "email": "jakab.gipsz@company.com",
+  "department": "IT",
+  "position": "Backend Developer"
+}
+
+###
+
+### 3. Egy dolgozó lekérdezése ID alapján (READ ONE)
+# Cseréld ki a lenti ID-t arra, amit az előző POST kérésnél kaptál!
+@employeeId = IDE_MASOLD_AZ_ID_T
+
+GET {{HostAddress}}/api/employee/{{employeeId}}
+Accept: application/json
+
+###
+
+### 4. Dolgozó adatainak frissítése (UPDATE)
+PUT {{HostAddress}}/api/employee/{{employeeId}}
+Content-Type: application/json
+
+{
+  "firstName": "Gipsz",
+  "lastName": "Jakab",
+  "email": "jakab.gipsz@company.com",
+  "department": "IT",
+  "position": "Senior Backend Developer"
+}
+
+###
+
+### 5. Dolgozó törlése (DELETE)
+DELETE {{HostAddress}}/api/employee/{{employeeId}}

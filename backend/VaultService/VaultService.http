@@ -1,0 +1,28 @@
+@HostAddress = http://localhost:5002
+
+### 1. Összes béradat lekérdezése (Eleinte üres listát ad)
+GET {{HostAddress}}/api/compensation
+Accept: application/json
+
+###
+
+### 2. Új béradat létrehozása egy dolgozóhoz
+# Másold be ide azt az ID-t, amit a DirectoryService-ben Gipsz Jakabhoz kaptál!
+@employeeId = 69aed9376b39bc03575e40eb
+
+POST {{HostAddress}}/api/compensation
+Content-Type: application/json
+
+{
+  "employeeId": "{{employeeId}}",
+  "taxNumber": "8123456789",
+  "bankAccountNumber": "11773023-12345678-00000000",
+  "grossBaseSalary": 1200000,
+  "currency": "HUF"
+}
+
+###
+
+### 3. Béradat lekérdezése a dolgozó ID-ja alapján
+GET {{HostAddress}}/api/compensation/employee/{{employeeId}}
+Accept: application/json
