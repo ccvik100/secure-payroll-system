@@ -23,27 +23,34 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # 1. Directory API építése
       - name: Build and Push Directory API
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/DirectoryService
+          context: ./backend
+          file: ./backend/DirectoryService/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-directory:latest
 
+      # 2. Vault API építése
       - name: Build and Push Vault API
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/VaultService
+          context: ./backend
+          file: ./backend/VaultService/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-vault:latest
 
+      # 3. Finance MCP építése
       - name: Build and Push Finance MCP
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/FinanceMcp
+          context: ./backend
+          file: ./backend/FinanceMcp/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-mcp:latest
 
+      # 4. Frontend építése (Itt is explicit megadjuk a Dockerfile-t)
       - name: Build and Push Frontend
         uses: docker/build-push-action@v5
         with:
