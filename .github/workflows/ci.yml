@@ -27,8 +27,8 @@ jobs:
       - name: Build and Push Directory API
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/DirectoryService/Dockerfile
+          context: backend
+          file: backend/DirectoryService/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-directory:latest
 
@@ -36,8 +36,8 @@ jobs:
       - name: Build and Push Vault API
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/VaultService/Dockerfile
+          context: backend
+          file: backend/VaultService/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-vault:latest
 
@@ -45,16 +45,16 @@ jobs:
       - name: Build and Push Finance MCP
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/FinanceMcp/Dockerfile
+          context: backend
+          file: backend/FinanceMcp/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-mcp:latest
 
-      # 4. Frontend építése (Itt is explicit megadjuk a Dockerfile-t)
+      # 4. Frontend építése (Itt a Dockerfile.dev-et használjuk!)
       - name: Build and Push Frontend
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: frontend
+          file: frontend/Dockerfile.dev
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-frontend:latest
