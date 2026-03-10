@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data.compensation ? 'Béradatok szerkesztése' : 'Béradatok hozzáadása' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px; min-width: 300px;">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Adóazonosító</mat-label>
+      <input matInput formControlName="taxNumber" placeholder="Pl. 8123456789">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Bankszámlaszám</mat-label>
+      <input matInput formControlName="bankAccountNumber" placeholder="Pl. 11773023-...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Bruttó alapbér</mat-label>
+      <input matInput type="number" formControlName="grossBaseSalary">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pénznem</mat-label>
+      <input matInput formControlName="currency" placeholder="Pl. HUF">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Mégse</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Mentés</button>
+</mat-dialog-actions>

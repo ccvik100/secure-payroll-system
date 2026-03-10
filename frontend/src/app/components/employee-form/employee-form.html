@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{ data ? 'Dolgozó szerkesztése' : 'Új dolgozó hozzáadása' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" 
+    style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px; min-width: 350px; width: 100%;">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Vezetéknév</mat-label>
+      <input matInput formControlName="lastName" placeholder="Pl. Gipsz">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Keresztnév</mat-label>
+      <input matInput formControlName="firstName" placeholder="Pl. Jakab">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Részleg</mat-label>
+      <input matInput formControlName="department" placeholder="Pl. IT">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pozíció</mat-label>
+      <input matInput formControlName="position" placeholder="Pl. Backend Developer">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Mégse</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Mentés</button>
+</mat-dialog-actions>

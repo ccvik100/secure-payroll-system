@@ -1,0 +1,45 @@
+<div class="container" style="padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+    <h2>Munkavállalók listája</h2>
+    <button mat-raised-button color="primary" (click)="openForm()">+ Új dolgozó</button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+    
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Név </th>
+      <td mat-cell *matCellDef="let emp"> {{emp.lastName}} {{emp.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let emp"> {{emp.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Részleg </th>
+      <td mat-cell *matCellDef="let emp"> {{emp.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Pozíció </th>
+      <td mat-cell *matCellDef="let emp"> {{emp.position}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Akciók </th>
+      <td mat-cell *matCellDef="let emp" style="white-space: nowrap;">
+        <div style="display: flex; gap: 8px;">
+          <button mat-stroked-button color="primary" [routerLink]="['/employees', emp.id]">Részletek</button>
+          <button mat-stroked-button color="accent" (click)="openForm(emp)">Szerkesztés</button>
+          <button mat-stroked-button color="warn" (click)="deleteEmployee(emp.id!)">Törlés</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

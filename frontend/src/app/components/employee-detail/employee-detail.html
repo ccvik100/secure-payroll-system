@@ -1,0 +1,42 @@
+<div class="container" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+  
+  <button mat-button color="primary" routerLink="/employees" style="margin-bottom: 20px;">
+    &larr; Vissza a listához
+  </button>
+
+  <div *ngIf="loading()" style="display: flex; justify-content: center; margin-top: 50px;">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading() && employee()">
+    <mat-card style="margin-bottom: 20px;">
+      <mat-card-header>
+        <mat-card-title>{{ employee()?.lastName }} {{ employee()?.firstName }}</mat-card-title>
+        <mat-card-subtitle>{{ employee()?.department }} - {{ employee()?.position }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content style="margin-top: 15px;">
+        <p><strong>Email:</strong> {{ employee()?.email }}</p>
+        <p><strong>Azonosító:</strong> <span style="color: gray;">{{ employee()?.id }}</span></p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card style="background-color: #fff3e0;" *ngIf="compensation()">
+      <mat-card-header style="display: flex; justify-content: space-between; align-items: center;">
+        <mat-card-title style="color: #e65100; margin: 0;">Szenzitív Béradatok (Vault DB)</mat-card-title>
+        <button mat-raised-button color="accent" (click)="openCompensationForm()">Módosítás</button>
+      </mat-card-header>
+      <mat-card-content style="margin-top: 15px;">
+        <p><strong>Adóazonosító:</strong> {{ compensation()?.taxNumber }}</p>
+        <p><strong>Bankszámlaszám:</strong> {{ compensation()?.bankAccountNumber }}</p>
+        <p><strong>Bruttó alapbér:</strong> <span style="font-size: 1.2em; font-weight: bold;">{{ compensation()?.grossBaseSalary | number }} {{ compensation()?.currency }}</span></p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card style="background-color: #ffebee;" *ngIf="!compensation()">
+      <mat-card-content style="margin-top: 15px; color: #c62828; display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;">Ehhez a dolgozóhoz nem található szenzitív béradat a Vault rendszerben.</p>
+        <button mat-raised-button color="warn" (click)="openCompensationForm()">+ Béradat hozzáadása</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
