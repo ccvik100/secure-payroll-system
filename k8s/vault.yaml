@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-api
+  template:
+    metadata:
+      labels:
+        app: vault-api
+    spec:
+      containers:
+      - name: vault-api
+        image: ghcr.io/ccvik100/payroll-vault:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ConnectionStrings__MongoDb
+          value: "mongodb://payroll-mongodb:27017"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-api
+spec:
+  selector:
+    app: vault-api
+  ports:
+  - port: 5002
+    targetPort: 8080

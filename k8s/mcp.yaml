@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finance-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finance-mcp
+  template:
+    metadata:
+      labels:
+        app: finance-mcp
+    spec:
+      containers:
+      - name: finance-mcp
+        image: ghcr.io/ccvik100/payroll-mcp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finance-mcp
+spec:
+  selector:
+    app: finance-mcp
+  ports:
+  - port: 5003
+    targetPort: 8080
