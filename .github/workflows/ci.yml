@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./backend/DirectoryService/Dockerfile
+          file: ./backend/DirectoryService/Dockerfile.dev
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-directory:latest
 
@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./backend/VaultService/Dockerfile
+          file: ./backend/VaultService/Dockerfile.dev
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-vault:latest
 
@@ -46,7 +46,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./backend/FinanceMcp/Dockerfile
+          file: ./backend/FinanceMcp/Dockerfile.dev
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/payroll-mcp:latest
 
