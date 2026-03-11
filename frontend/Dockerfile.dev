@@ -1,14 +1,15 @@
-# Modern Node.js környezet az Angular 21-hez
-FROM node:22-alpine AS dev
-
+FROM node:20-alpine
 WORKDIR /app
 
-# Angular CLI globális telepítése a konténerben
-RUN npm install -g @angular/cli@21
+# 1. Először a csomagokat másoljuk és telepítjük
+COPY package*.json ./
+RUN npm install
 
-# Exponáljuk az alapértelmezett Angular portot
+# 2. Utána bemásoljuk a teljes kódot
+COPY . .
+
+# 3. Kinyitjuk a 4200-as portot
 EXPOSE 4200
 
-# Az ng serve a --poll paraméterrel biztosítja, hogy a Docker volume-on
-# keresztül is azonnal érzékelje a fájl módosításokat (Windows/Mac hálózati fájlrendszer miatt fontos)
-CMD ["sh", "-c", "npm install && ng serve --host 0.0.0.0 --poll 2000"]
+# 4. Elindítjuk az Angulart a felhőre optimalizálva
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
