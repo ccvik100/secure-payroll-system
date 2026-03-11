@@ -19,8 +19,10 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: ConnectionStrings__MongoDb
+        - name: MongoDbSettings__ConnectionString
           value: "mongodb://payroll-mongodb:27017"
+        - name: MongoDbSettings__DatabaseName
+          value: "VaultDb"
 ---
 apiVersion: v1
 kind: Service
