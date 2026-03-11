@@ -11,5 +11,4 @@ COPY . .
 # 3. Kinyitjuk a 4200-as portot
 EXPOSE 4200
 
-# 4. Elindítjuk az Angulart a felhőre optimalizálva
 CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
