@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: vault-api
 spec:
+  type: LoadBalancer
   selector:
     app: vault-api
   ports:

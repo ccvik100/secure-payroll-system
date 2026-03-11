@@ -24,6 +24,7 @@ kind: Service
 metadata:
   name: finance-mcp
 spec:
+  type: LoadBalancer
   selector:
     app: finance-mcp
   ports:

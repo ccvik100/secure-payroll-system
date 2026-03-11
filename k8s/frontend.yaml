@@ -24,10 +24,9 @@ kind: Service
 metadata:
   name: payroll-frontend
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: payroll-frontend
   ports:
   - port: 4200
     targetPort: 4200
-    nodePort: 32420

@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: directory-api
 spec:
+  type: LoadBalancer
   selector:
     app: directory-api
   ports:
