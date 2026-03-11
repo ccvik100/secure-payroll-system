@@ -1,11 +1,4 @@
-# Fejlesztői környezethez a teljes .NET 10 SDK-t használjuk
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS dev
-
+FROM mcr.microsoft.com/dotnet/sdk:8.0
 WORKDIR /app
-
-# Exponáljuk a portot, amit a docker-compose-ban is beállítottunk
-EXPOSE 8080
-
-# A "dotnet watch" parancs felel a hot-reloadért. 
-# Bármikor mentesz egy .cs fájlt a VS Code-ban, a szerver automatikusan újrafordul.
-ENTRYPOINT ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:8080"]
+COPY . .
+ENTRYPOINT ["dotnet", "run", "--urls", "http://0.0.0.0:8080"]
